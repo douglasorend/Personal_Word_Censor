@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:PersonalWordCensor</id>
+<name>Personal Word Censor</name>
+<version>1.0</version>
+
+<file name="$sourcedir/Load.php">
+	<!-- loadUserSettings function -->
+	<operation>	<!-- line 548 -->
+		<search position="before"><![CDATA['permissions' => array(),]]></search>
+		<add><![CDATA[
+		'censor_vulgar' => !empty($user_settings['censor_vulgar']) ? $user_settings['censor_vulgar'] : '',
+		'censor_proper' => !empty($user_settings['censor_proper']) ? $user_settings['censor_proper'] : '',]]></add>
+	</operation>
+
+	<!-- censorText function -->
+	<operation>	<!-- line 2145 -->
+		<search position="before"><![CDATA[global $modSettings, $options, $settings, $txt]]></search>
+		<add><![CDATA[, $user_info]]></add>
+	</operation>
+	<operation>	<!-- line 2148 -->
+		<search position="replace"><![CDATA[empty($modSettings['censor_vulgar'])]]></search>
+		<add><![CDATA[(empty($modSettings['censor_vulgar']) && empty($user_info['censor_vulgar']))]]></add>
+	</operation>
+	<operation>	<!-- line 2154 -->
+		<search position="before"><![CDATA[$censor_vulgar = explode("\n", $modSettings['censor_vulgar']]]></search>
+		<add><![CDATA[ . (!empty($user_info['censor_vulgar']) ? "\n" . $user_info['censor_vulgar'] : '')]]></add>
+	</operation>
+	<operation>	<!-- line 2154 -->
+		<search position="before"><![CDATA[$censor_proper = explode("\n", $modSettings['censor_proper']]]></search>
+		<add><![CDATA[ . (!empty($user_info['censor_proper']) ? "\n" . $user_info['censor_proper'] : '')]]></add>
+	</operation>
+</file>
+</modification>
