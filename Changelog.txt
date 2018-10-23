@@ -1,3 +1,7 @@
+v1.3 - October 23rd, 2018
+o No functionality change.
+o Updated documentation to point to new website.
+
 v1.2 - August 15th, 2018
 o Fixed [b]package-info.xml[/b] so that database changes are actually made.
 

@@ -1,29 +1,33 @@
-[hr]
-[center][color=red][size=16pt][b]PERSONAL WORD CENSOR v1.3[/b][/size][/color]
-[url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=https://custom.simplemachines.org/mods/index.php?mod=4176]Link to Mod[/url]
-[/center]
-[hr]
+------
 
-[color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
+# PERSONAL WORD CENSOR v1.3
+
+[**By Dougiefresh**](http://www.simplemachines.org/community/index.php?action=profile;u=253913) -> [Link to Mod](https://custom.simplemachines.org/mods/index.php?mod=4176)
+
+------
+
+## Introduction
 This mod allows each user to specify words to censor and their replacements, much like the admin panel does.  The only difference is this mod's censor list is user-specific, not global (as the admin panel is).  Admin's are also allowed to see each user's personal word censor list.
 
-[color=blue][b][size=12pt][u]Profile Settings[/u][/size][/b][/color]
-Under [b]Profile[/b] => [b]Modify Profile[/b], there is a new entry called [b]Personal Censored Words[/b].  There you can specify the words to censor and the replacements for each censored word.
+## Profile Settings
+Under **Profile** => **Modify Profile**, there is a new entry called **Personal Censored Words**.  There you can specify the words to censor and the replacements for each censored word.
 
-[color=blue][b][size=12pt][u]Admin Settings[/u][/size][/b][/color]
+## Admin Settings
 There are no admin settings for this mod.  To disable, you must uninstall the mod.
 
-[color=blue][b][size=12pt][u]Related Discussions[/u][/size][/b][/color]
-o [url=https://www.simplemachines.org/community/index.php?topic=559460.0]Personal Word Censor[/url]
+**## Related Discussions**
 
-[color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
+- [Personal Word Censor](https://www.simplemachines.org/community/index.php?topic=559460.0)
+
+## Compatibility Notes
 This mod was tested on SMF 2.0.15 and SMF 2.1 Beta 3, but should work on SMF 2.0 and up.  SMF 2.1 Beta 1, SMF 2.1 Beta 2, and SMF 1.x is not and will not be supported.
 
-[color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
-The changelog can be viewed at [url=http://www.xptsp.com/board/free-modifications/personal-word-censor/?tab=1]XPtsp.com[/url].
+## Changelog
+The changelog can be viewed at [XPtsp.com](http://www.xptsp.com/board/free-modifications/personal-word-censor/?tab=1).
 
-[color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
+## License
 Copyright (c) 2018, Douglas Orend
+
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
