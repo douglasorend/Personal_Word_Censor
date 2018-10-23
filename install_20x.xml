@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PersonalWordCensor</id>
 <name>Personal Word Censor</name>
-<version>1.0</version>
+<version>1.0.1</version>
 
 <file name="$sourcedir/Load.php">
 	<!-- loadUserSettings function -->
@@ -12,6 +12,13 @@
 		<add><![CDATA[
 		'censor_vulgar' => !empty($user_settings['censor_vulgar']) ? $user_settings['censor_vulgar'] : '',
 		'censor_proper' => !empty($user_settings['censor_proper']) ? $user_settings['censor_proper'] : '',]]></add>
+	</operation>
+
+	<!-- loadMemberData function -->
+	<operation>	<!-- line 1015 -->
+		<search position="before"><![CDATA[CASE WHEN mem.id_group = 0 OR mg.stars = {string:blank_string} THEN pg.stars ELSE mg.stars END AS stars, mem.password_salt, mem.pm_prefs]]></search>
+		<add><![CDATA[,
+			mem.censor_vulgar, mem.censor_proper]]></add>
 	</operation>
 
 	<!-- censorText function -->

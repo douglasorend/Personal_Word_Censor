@@ -1,12 +1,11 @@
 [hr]
-[center][color=red][size=16pt][b]PERSONAL WORD CENSOR v1.0[/b][/size][/color]
+[center][color=red][size=16pt][b]PERSONAL WORD CENSOR v1.0.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=https://custom.simplemachines.org/mods/index.php?mod=4176]Link to Mod[/url]
 [/center]
 [hr]
 
 [color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
-
-This mod allows each user to specify words to censor and their replacements, much like the admin panel does.  The only difference is this mod's censor list is user-specific, not global (as the admin panel is).
+This mod allows each user to specify words to censor and their replacements, much like the admin panel does.  The only difference is this mod's censor list is user-specific, not global (as the admin panel is).  Admin's are also allowed to see each user's personal word censor list.
 
 [color=blue][b][size=12pt][u]Profile Settings[/u][/size][/b][/color]
 Under [b]Profile[/b] => [b]Modify Profile[/b], there is a new entry called [b]Personal Censored Words[/b].  There you can specify the words to censor and the replacements for each censored word.

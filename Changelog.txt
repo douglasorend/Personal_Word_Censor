@@ -1,2 +1,6 @@
+v1.0.1 - March 23rd, 2018
+o Fixed mod visibility issue when viewing another user's profile.
+o Fixed code so that it updates correct member record with new censor info.
+
 v1.0 - March 22nd, 2018
 o Initial release to the public

@@ -1,12 +1,28 @@
 <?php
+/**********************************************************************************
+* Profile-Censor.php - Subs of the Personal Word Censor mod
+***********************************************************************************
+* This mod is licensed under the 2-clause BSD License, which can be found here:
+*	http://opensource.org/licenses/BSD-2-Clause
+***********************************************************************************
+* This program is distributed in the hope that it is and will be useful, but      *
+* WITHOUT ANY WARRANTIES; without even any implied warranty of MERCHANTABILITY    *
+* or FITNESS FOR A PARTICULAR PURPOSE.                                            *
+**********************************************************************************/
+if (!defined('SMF')) 
+	die('Hacking attempt...');
 
+/**********************************************************************************
+// Profile hook that adds the Personal Word Censor area:
+**********************************************************************************/
 function PWC_Profile(&$profile_areas)
 {
-	global $txt;
+	global $txt, $context;
 
 	$profile_areas['edit_profile']['areas']['censor'] = array(
 		'label' => $txt['personal_censored_words'],
 		'file' => 'Profile-Censor.php',
+		'enabled' => $context['user']['is_owner'] || $context['user']['is_admin'],
 		'function' => 'PWC_SetCensor',
 		'permission' => array(
 			'own' => 'profile_view_own',
@@ -15,10 +31,12 @@ function PWC_Profile(&$profile_areas)
 	);
 }
 
-// Set the censored words.
+/**********************************************************************************
+// Function that sets the personal word censor list:
+**********************************************************************************/
 function PWC_SetCensor()
 {
-	global $txt, $user_info, $context, $smcFunc;
+	global $txt, $context, $smcFunc, $cur_profile, $user_info;
 
 	if (!empty($_POST['save_censor']))
 	{
@@ -56,25 +74,25 @@ function PWC_SetCensor()
 			}
 		}
 
-		// Sanantize the input, then update the member record with the new info....
-		$user_info['censor_vulgar'] = $smcFunc['htmlspecialchars'](implode("\n", $censored_vulgar));
-		$user_info['censor_proper'] = $smcFunc['htmlspecialchars'](implode("\n", $censored_proper));
+		// Sanitize the input, then update the member record with the new info....
+		$cur_profile['censor_vulgar'] = $smcFunc['htmlspecialchars'](implode("\n", $censored_vulgar));
+		$cur_profile['censor_proper'] = $smcFunc['htmlspecialchars'](implode("\n", $censored_proper));
 		$fields = array(
-			'censor_vulgar' => $user_info['censor_vulgar'] ,
-			'censor_proper' => $user_info['censor_proper'],
+			'censor_vulgar' => $cur_profile['censor_vulgar'] ,
+			'censor_proper' => $cur_profile['censor_proper'],
 		);
-		updateMemberData($user_info['id'], $fields);
+		updateMemberData($context['id_member'], $fields);
 	}
 
 	if (isset($_POST['censortest']))
 	{
 		$censorText = htmlspecialchars($_POST['censortest'], ENT_QUOTES);
-		$context['censor_test'] = strtr(censorText($censorText), array('"' => '&quot;'));
+		$context['censor_test'] = strtr(PWC_censorText($censorText), array('"' => '&quot;'));
 	}
 
 	// Set everything up for the template to do its thang.
-	$censor_vulgar = explode("\n", $user_info['censor_vulgar']);
-	$censor_proper = explode("\n", $user_info['censor_proper']);
+	$censor_vulgar = explode("\n", $cur_profile['censor_vulgar']);
+	$censor_proper = explode("\n", $cur_profile['censor_proper']);
 
 	$context['censored_words'] = array();
 	for ($i = 0, $n = count($censor_vulgar); $i < $n; $i++)
@@ -90,21 +108,55 @@ function PWC_SetCensor()
 	}
 
 	loadTemplate('Admin');
+	loadLanguage('Admin');
 	$context['sub_template'] = 'edit_censored';
-	$txt['admin_censored_words'] = $txt['personal_censored_words'];
-	$context['page_title'] = $txt['admin_censored_words'];
+	$context['page_title'] = $txt['admin_censored_words'] = $txt['personal_censored_words'];
 
 	// We need to edit the admin-level form before it gets to the user:
 	add_integration_function('integrate_buffer', 'PWC_Buffer', false);
 }
 
+/**********************************************************************************
+// Internal function that replaces all vulgar words with respective proper words
+// for user editing their personal censor words. (substring or whole words..)
+**********************************************************************************/
+function &PWC_censorText(&$text, $force = false)
+{
+	global $modSettings, $options, $settings, $txt, $cur_profile;
+
+	if ((!empty($options['show_no_censored']) && $settings['allow_no_censored'] && !$force) || empty($cur_profile['censor_vulgar']))
+		return $text;
+
+	// If they haven't yet been loaded, load them.
+	$censor_vulgar = explode("\n", $modSettings['censor_vulgar'] . (!empty($cur_profile['censor_vulgar']) ? "\n" . $cur_profile['censor_vulgar'] : ''));
+	$censor_proper = explode("\n", $modSettings['censor_proper'] . (!empty($cur_profile['censor_proper']) ? "\n" . $cur_profile['censor_proper'] : ''));
+
+	// Quote them for use in regular expressions.
+	for ($i = 0, $n = count($censor_vulgar); $i < $n; $i++)
+	{
+		$censor_vulgar[$i] = strtr(preg_quote($censor_vulgar[$i], '/'), array('\\\\\\*' => '[*]', '\\*' => '[^\s]*?', '&' => '&amp;'));
+		$censor_vulgar[$i] = (empty($modSettings['censorWholeWord']) ? '/' . $censor_vulgar[$i] . '/' : '/(?<=^|\W)' . $censor_vulgar[$i] . '(?=$|\W)/') . (empty($modSettings['censorIgnoreCase']) ? '' : 'i') . ((empty($modSettings['global_character_set']) ? $txt['lang_character_set'] : $modSettings['global_character_set']) === 'UTF-8' ? 'u' : '');
+
+		if (strpos($censor_vulgar[$i], '\'') !== false)
+		{
+			$censor_proper[count($censor_vulgar)] = $censor_proper[$i];
+			$censor_vulgar[count($censor_vulgar)] = strtr($censor_vulgar[$i], array('\'' => '&#039;'));
+		}
+	}
+
+	// Censoring isn't so very complicated :P.
+	$text = preg_replace($censor_vulgar, $censor_proper, $text);
+	return $text;
+}
+
+/**********************************************************************************
+// Hook function that alters the admin template for this mod:
+**********************************************************************************/
 function PWC_Buffer($buffer)
 {
-	global $txt;
 	$buffer = str_replace('?action=admin;area=postsettings;sa=censor', '?action=profile;area=censor' . (!empty($_GET['u']) ? ';u=' . $_GET['u'] : ''), $buffer);
 	$buffer = preg_replace('@<hr[^>]*?/>@siu', '<br class="clear" />', $buffer);
-	$buffer = preg_replace('@<dl class="settings">.*?</dl\>@siu', '', $buffer);
-	return $buffer;
+	return preg_replace('@<dl class="settings">.*?</dl\>@siu', '', $buffer);
 }
 
 ?>
