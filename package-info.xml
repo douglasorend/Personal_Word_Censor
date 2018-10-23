@@ -5,17 +5,33 @@
 	<id>Dougiefresh:PersonalWordCensor</id>
 	<name>Personal Word Censor</name>
 	<type>modification</type>
-	<version>1.0.4</version>
+	<version>1.1</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
 		<modification>install_20x.xml</modification>
 		<modification>language_english.xml</modification>
+		<modification>language_spanish_latin.xml</modification>
 		<require-file name="Profile-Censor.php" destination="$sourcedir" />
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<modification reverse="true">install_20x.xml</modification>
 		<modification reverse="true">language_english.xml</modification>
+		<modification reverse="true">language_spanish_latin.xml</modification>
+		<remove-file name="$sourcedir/Profile-Censor.php" />		
+	</uninstall>
+
+	<install for="2.1 Beta 3">
+		<readme parsebbc="true">readme.txt</readme>
+		<modification>install_21x.xml</modification>
+		<modification>language_english.xml</modification>
+		<modification>language_spanish_latin.xml</modification>
+		<require-file name="Profile-Censor.php" destination="$sourcedir" />
+	</install>
+	<uninstall for="2.1 Beta 3">
+		<modification reverse="true">install_21x.xml</modification>
+		<modification reverse="true">language_english.xml</modification>
+		<modification reverse="true">language_spanish_latin.xml</modification>
 		<remove-file name="$sourcedir/Profile-Censor.php" />		
 	</uninstall>
 </package-info>

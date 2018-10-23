@@ -16,14 +16,14 @@
 
 	<!-- loadMemberData function -->
 	<operation>	<!-- line 1015 -->
-		<search position="before"><![CDATA[CASE WHEN mem.id_group = 0 OR mg.stars = {string:blank_string} THEN pg.stars ELSE mg.stars END AS stars, mem.password_salt, mem.pm_prefs]]></search>
+		<search position="before"><![CDATA[CASE WHEN mem.id_group = 0 OR mg.icons = {string:blank_string} THEN pg.icons ELSE mg.icons END AS icons]]></search>
 		<add><![CDATA[,
 			mem.censor_vulgar, mem.censor_proper]]></add>
 	</operation>
 
 	<!-- censorText function -->
 	<operation>	<!-- line 2145 -->
-		<search position="before"><![CDATA[global $modSettings, $options, $settings, $txt]]></search>
+		<search position="before"><![CDATA[global $modSettings, $options, $txt]]></search>
 		<add><![CDATA[, $user_info]]></add>
 	</operation>
 	<operation>	<!-- line 2148 -->
@@ -43,18 +43,15 @@
 	<!-- template_edit_censored function -->
 	<operation>
 		<search position="before"><![CDATA[
-					<hr width="100%" size="1" class="hrcolor clear" />
-					<dl class="settings">
-						<dt>
-							<strong><label for="censorWholeWord_check">', $txt['censor_whole_words'], ':</label></strong>]]></search>
+									<dt>
+										<strong><label for="censorWholeWord_check">', $txt['censor_whole_words'], ':</label></strong>]]></search>
 		<add><![CDATA[';
 	if (empty($context['PWC_settings']))
 		echo ']]></add>
 	</operation>
 	<operation>
-		<search position="after"><![CDATA[<input type="checkbox" name="censorIgnoreCase" value="1" id="censorIgnoreCase_check"', empty($modSettings['censorIgnoreCase']) ? '' : ' checked="checked"', ' class="input_check" />
-						</dd>
-					</dl>]]></search>
+		<search position="after"><![CDATA[<strong><label for="censorIgnoreCase_check">', $txt['censor_case'], ':</label></strong>
+									</dt>]]></search>
 		<add><![CDATA[';
 	echo ']]></add>
 	</operation>

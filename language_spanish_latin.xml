@@ -3,13 +3,21 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PersonalWordCensor</id>
 <name>Personal Word Censor</name>
-<version>1.1</version>
+<version>1.0.4</version>
 
-<file name="$languagedir/Profile.english.php">
+<file name="$languagedir/Profile.spanish_latin.php" error="skip">
 	<operation>
 		<search position="end" />
 		<add><![CDATA[
-$txt['personal_censored_words'] = 'Personal Word Censor';
+$txt['personal_censored_words'] = 'Censurador personal de palabras';
+]]></add>
+	</
+	
+<file name="$languagedir/Profile.spanish_latin-utf8.php" error="skip">
+	<operation>
+		<search position="end" />
+		<add><![CDATA[
+$txt['personal_censored_words'] = 'Censurador personal de palabras';
 ]]></add>
 	</operation>
 </file>

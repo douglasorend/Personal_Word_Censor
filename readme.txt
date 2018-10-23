@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]PERSONAL WORD CENSOR v1.0.4[/b][/size][/color]
+[center][color=red][size=16pt][b]PERSONAL WORD CENSOR v1.1[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=https://custom.simplemachines.org/mods/index.php?mod=4176]Link to Mod[/url]
 [/center]
 [hr]
@@ -17,7 +17,7 @@ There are no admin settings for this mod.  To disable, you must uninstall the mo
 o [url=https://www.simplemachines.org/community/index.php?topic=559460.0]Personal Word Censor[/url]
 
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
-This mod was tested on SMF 2.0.15, but should work on SMF 2.0 and up.  SMF 1.x is not and will not be supported.
+This mod was tested on SMF 2.0.15 and SMF 2.1 Beta 3, but should work on SMF 2.0 and up.  SMF 2.1 Beta 1, SMF 2.1 Beta 2, and SMF 1.x is not and will not be supported.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
 The changelog has been removed and can be seen at [url=http://www.xptsp.com/board/index.php?topic=1638.msg2384#msg2384]XPtsp.com[/url].
