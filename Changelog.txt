@@ -1,3 +1,6 @@
+v1.0.4 - April 26th, 2018
+o Added missing file operation to [b]package-info.xml[/b].
+
 v1.0.3 - April 16th, 2018
 o Closed file operation at end in [b]install_20x.xml[/b].
 

@@ -5,16 +5,17 @@
 	<id>Dougiefresh:PersonalWordCensor</id>
 	<name>Personal Word Censor</name>
 	<type>modification</type>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
-		<code>file_check.php</code>
 		<modification>install_20x.xml</modification>
 		<modification>language_english.xml</modification>
+		<require-file name="Profile-Censor.php" destination="$sourcedir" />
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<modification reverse="true">install_20x.xml</modification>
 		<modification reverse="true">language_english.xml</modification>
+		<remove-file name="$sourcedir/Profile-Censor.php" />		
 	</uninstall>
 </package-info>
