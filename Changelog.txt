@@ -1,3 +1,7 @@
+v1.0.2 - March 24th, 2018
+o Added changes to [b]Admin.template.php[/b] to exclude certain settings.
+o Gutted buffer-altering hook function to only change form URL.
+
 v1.0.1 - March 23rd, 2018
 o Fixed mod visibility issue when viewing another user's profile.
 o Fixed code so that it updates correct member record with new censor info.

@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PersonalWordCensor</id>
 <name>Personal Word Censor</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 
 <file name="$sourcedir/Load.php">
 	<!-- loadUserSettings function -->
@@ -39,4 +39,23 @@
 		<add><![CDATA[ . (!empty($user_info['censor_proper']) ? "\n" . $user_info['censor_proper'] : '')]]></add>
 	</operation>
 </file>
+<file name="$themedir/Admin.template.php">
+	<!-- template_edit_censored function -->
+	<operation>
+		<search position="before"><![CDATA[
+					<hr width="100%" size="1" class="hrcolor clear" />
+					<dl class="settings">
+						<dt>
+							<strong><label for="censorWholeWord_check">', $txt['censor_whole_words'], ':</label></strong>]]></search>
+		<add><![CDATA[';
+	if (empty($context['PWC_settings']))
+		echo ']]></add>
+	</operation>
+	<operation>
+		<search position="after"><![CDATA[<input type="checkbox" name="censorIgnoreCase" value="1" id="censorIgnoreCase_check"', empty($modSettings['censorIgnoreCase']) ? '' : ' checked="checked"', ' class="input_check" />
+						</dd>
+					</dl>]]></search>
+		<add><![CDATA[';
+	echo ']]></add>
+	</operation>
 </modification>

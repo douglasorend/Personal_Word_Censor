@@ -111,9 +111,19 @@ function PWC_SetCensor()
 	loadLanguage('Admin');
 	$context['sub_template'] = 'edit_censored';
 	$context['page_title'] = $txt['admin_censored_words'] = $txt['personal_censored_words'];
+	$context['PWC_settings'] = true;
 
 	// We need to edit the admin-level form before it gets to the user:
 	add_integration_function('integrate_buffer', 'PWC_Buffer', false);
+}
+
+/**********************************************************************************
+// Hook function that alters the admin template for this mod:
+**********************************************************************************/
+function PWC_Buffer($buffer)
+{
+	global $context;
+	return str_replace('?action=admin;area=postsettings;sa=censor', '?action=profile;area=censor' . (!empty($_GET['u']) ? ';u=' . $_GET['u'] : ''), $buffer);
 }
 
 /**********************************************************************************
@@ -147,16 +157,6 @@ function &PWC_censorText(&$text, $force = false)
 	// Censoring isn't so very complicated :P.
 	$text = preg_replace($censor_vulgar, $censor_proper, $text);
 	return $text;
-}
-
-/**********************************************************************************
-// Hook function that alters the admin template for this mod:
-**********************************************************************************/
-function PWC_Buffer($buffer)
-{
-	$buffer = str_replace('?action=admin;area=postsettings;sa=censor', '?action=profile;area=censor' . (!empty($_GET['u']) ? ';u=' . $_GET['u'] : ''), $buffer);
-	$buffer = preg_replace('@<hr[^>]*?/>@siu', '<br class="clear" />', $buffer);
-	return preg_replace('@<dl class="settings">.*?</dl\>@siu', '', $buffer);
 }
 
 ?>
