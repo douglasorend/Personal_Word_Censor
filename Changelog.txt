@@ -1,3 +1,6 @@
+v1.2 - August 15th, 2018
+o Fixed [b]package-info.xml[/b] so that database changes are actually made.
+
 v1.1 - May 21st, 2018
 o Added support for SMF 2.1 Beta 3.
 o Added Spanish Latin translation, courtsey of [url=https://www.simplemachines.org/community/index.php?action=profile;u=322597]Rock Lee[/url].

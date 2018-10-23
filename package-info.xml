@@ -5,10 +5,11 @@
 	<id>Dougiefresh:PersonalWordCensor</id>
 	<name>Personal Word Censor</name>
 	<type>modification</type>
-	<version>1.1</version>
+	<version>1.2</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
+		<database>db_install.php</database>
 		<modification>install_20x.xml</modification>
 		<modification>language_english.xml</modification>
 		<modification>language_spanish_latin.xml</modification>
@@ -23,6 +24,7 @@
 
 	<install for="2.1 Beta 3">
 		<readme parsebbc="true">readme.txt</readme>
+		<database>db_install.php</database>
 		<modification>install_21x.xml</modification>
 		<modification>language_english.xml</modification>
 		<modification>language_spanish_latin.xml</modification>
